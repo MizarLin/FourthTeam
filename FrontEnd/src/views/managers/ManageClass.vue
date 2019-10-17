@@ -51,7 +51,7 @@ export default {
       .then(response => {
         console.log(response.data);
         this.events = response.data.all;
-        this.each = response.data.each;        
+        this.each = response.data.each;
       })
       .catch(error => {
         console.log("There was an error:", error.response);
@@ -62,7 +62,7 @@ export default {
       // let category = this.className;
       console.log(this.className);
       this.axios
-        .post("http://127.0.0.1:8000/api/Admin/category", {category:this.className})
+        .post("http://127.0.0.1:8000/api/Admin/newCategory", {category:this.className})
         .then(res => {
           this.events = res.data.all;
           this.each = res.data.each;

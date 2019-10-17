@@ -33,6 +33,7 @@ export default {
 
     //類別管理
     classManage(){
+    // return apiClient.get('/api/Admin/countCategory')
     return apiClient.get('/api/Admin/countCategory')
     },
     //新增開發者

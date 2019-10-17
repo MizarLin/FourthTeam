@@ -112,16 +112,22 @@ export default {
   },
   methods: {
     submitButton() {
-      console.log(this.name);
-      console.log(this.phone);
-      console.log(this.email);
-      console.log(this.idNumber);
-      console.log(this.password);
+      console.log(this.input.name);
+      console.log(this.input.phone);
+      console.log(this.input.email);
+      console.log(this.input.idNumber);
+      console.log(this.input.password);
       // let { name, phone, email, idNumber, password } = this.input;
-      axios
-        .post("http://127.0.0.1:8000/api/Admin/newDeveloper", this.input)
+      // category
+      this.axios
+        .post("http://127.0.0.1:8000/api/Admin/newDeveloper", {name:this.input.name, phone:this.input.phone, email:this.input.email, idNumber:this.input.idNumber, password:this.input.password})
         .then(res => {
           console.log(res.data);
+          this.input.name = "";
+          this.input.phone = "";
+          this.input.email = "";
+          this.input.idNumber = "";
+          this.input.password = "";
         })
         .catch(error => {
           console.log(error);

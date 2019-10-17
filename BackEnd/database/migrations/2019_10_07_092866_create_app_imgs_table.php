@@ -16,7 +16,7 @@ class CreateAppImgsTable extends Migration
         Schema::create('app_imgs', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('appId')->unsigned();
-            // $table->foreign('appId')->references('id')->on('apps');
+            $table->foreign('appId')->references('id')->on('apps');
             $table->string('screenShot')->unique();
             $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP'));

@@ -42,14 +42,14 @@
                 type="button"
                 class="btn btn-primary btn-sm"
                 @click="stopApp(event.id)"
-                v-if="event.stopRight===1"
+                v-if="event.permission===1"
               >停用</button>
               <!-- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; -->
               <button
                 type="button"
                 class="btn btn-danger btn-sm"
                 @click="restoreApp(event.id)"
-                v-if="event.stopRight===0"
+                v-if="event.permission===0"
               >恢復</button>
             </td>
           </tr>

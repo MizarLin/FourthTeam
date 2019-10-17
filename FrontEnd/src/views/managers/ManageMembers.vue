@@ -43,14 +43,14 @@
               <button
                 type="button"
                 class="btn btn-primary btn-sm"
-                v-if="event.stopRight===1"
+                v-if="event.permission===1"
                 @click="stopMember(event.id)"
               >停權</button>
               <!-- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; -->
               <button
                 type="button"
                 class="btn btn-danger btn-sm"
-                v-if="event.stopRight===0"
+                v-if="event.permission===0"
                 @click="restoreMember(event.id)"
               >恢復</button>
             </td>

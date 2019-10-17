@@ -122,7 +122,7 @@ export default {
   methods: {
     submitButton() {
       let { name, oldPwdm, newPwd, pwdCheck } = this.input;
-      axios
+      this.axios
         .put("http://127.0.0.1:8000/api/Admin/1", this.input)
         .then(res => {
           console.log(res.data);

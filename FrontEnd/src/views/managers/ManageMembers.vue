@@ -92,7 +92,7 @@ export default {
       return newList;
     },
     stopMember(id) {
-      axios
+      this.axios
         .put("http://127.0.0.1:8000/api/Admin/stopMember/" + id)
         .then(res => {
           this.events = res.data;
@@ -102,7 +102,7 @@ export default {
         });
     },
     restoreMember(id) {
-      axios
+      this.axios
         .put("http://127.0.0.1:8000/api/Admin/restoreMember/" + id)
         .then(res => {
           this.events = res.data;

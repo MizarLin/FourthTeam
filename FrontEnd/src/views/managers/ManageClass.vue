@@ -9,7 +9,7 @@
     </nav>
 
     <div class="input-group mb-3">
-      <input type="text" class="form-control" placeholder="新增類別名稱" aria-describedby="classBtn" v-model="className">
+      <input type="text" class="form-control" placeholder="新增類別名稱" aria-describedby="classBtn" v-model="className" required>
       <div class="input-group-append">
         <button class="btn btn-outline-secondary" type="button" id="classBtn" @click="newClass">新增</button>
       </div>
@@ -27,8 +27,8 @@
         <tbody>
           <tr v-for="(event,index) in events" v-bind:key="event.id">
             <td>{{index+1}}</td>
-            <td>{{event.name}}</td>
-            <td>{{event.level}}</td>
+            <td>{{event.category}}</td>
+            <td>{{each[index]}}</td>
           </tr>
         </tbody>
       </table>
@@ -42,13 +42,16 @@ export default {
   data() {
     return {
       className: "",
-      events: []
+      events: [],
+      each:[]
     };
   },
   created() {
-    EventService.memberManage()
+    EventService.classManage()
       .then(response => {
-        this.events = response.data;
+        console.log(response.data);
+        this.events = response.data.all;
+        this.each = response.data.each;        
       })
       .catch(error => {
         console.log("There was an error:", error.response);
@@ -56,10 +59,14 @@ export default {
   },
   methods: {
     newClass() {
-      axios
-        .post("http://127.0.0.1:8000/api/Admin/category/")
+      // let category = this.className;
+      console.log(this.className);
+      this.axios
+        .post("http://127.0.0.1:8000/api/Admin/category", {category:this.className})
         .then(res => {
-          this.events = res.data;
+          this.events = res.data.all;
+          this.each = res.data.each;
+          this.className = "";
         })
         .catch(error => {
           console.log(error.res);

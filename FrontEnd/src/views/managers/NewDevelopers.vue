@@ -50,7 +50,7 @@
                 type="text"
                 class="form-control"
                 id="inputPhone"
-                placeholder="09xx-xxx-xxx"
+                placeholder="09xxxxxxxx"
                 pattern="^09\d{8}$"
                 required
                 v-model="input.phone"
@@ -112,7 +112,12 @@ export default {
   },
   methods: {
     submitButton() {
-      let { name, phone, email, idNumber, password } = this.input;
+      console.log(this.name);
+      console.log(this.phone);
+      console.log(this.email);
+      console.log(this.idNumber);
+      console.log(this.password);
+      // let { name, phone, email, idNumber, password } = this.input;
       axios
         .post("http://127.0.0.1:8000/api/Admin/newDeveloper", this.input)
         .then(res => {

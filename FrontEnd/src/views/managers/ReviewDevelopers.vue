@@ -80,7 +80,7 @@ export default {
       return newList;
     },
     CheckOK(id) {
-      axios
+      this.axios
         .put("http://127.0.0.1:8000/api/Admin/devCheckOk/" + id)
         .then(res => {
           this.events = res.data;
@@ -90,7 +90,7 @@ export default {
         });
     },
     goBack(id) {
-      axios
+      this.axios
         .put("http://127.0.0.1:8000/api/Admin/devGoBack/" + id)
         .then(res => {
           this.events = res.data;

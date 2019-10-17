@@ -31,6 +31,14 @@ export default {
     return apiClient.get('/api/Admin/memberManage')
     },
 
+    //類別管理
+    classManage(){
+    return apiClient.get('/api/Admin/countCategory')
+    },
+    //新增開發者
+    // developersNew(){
+    // return apiClient.get('/api/Admin/newDeveloper')
+    // }
 
     // getEvent(id) {
     // return apiClient.get('/member/' + id)

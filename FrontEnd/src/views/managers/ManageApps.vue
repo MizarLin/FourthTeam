@@ -60,6 +60,7 @@
 </template>
 
 <script>
+// import axios from "axios";
 import EventService from "@/service/EventService.js";
 
 export default {
@@ -89,7 +90,7 @@ export default {
       return newList;
     },
     stopApp(id) {
-      axios
+      this.axios
         .put("http://127.0.0.1:8000/api/Admin/stopApp/" + id)
         .then(res => {
           this.events = res.data;
@@ -99,7 +100,7 @@ export default {
         });
     },
     restoreApp(id) {
-      axios
+      this.axios
         .put("http://127.0.0.1:8000/api/Admin/restoreApp/" + id)
         .then(res => {
           this.events = res.data;

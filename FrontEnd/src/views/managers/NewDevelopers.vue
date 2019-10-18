@@ -20,7 +20,7 @@
                 id="inputName"
                 placeholder="Name"
                 required
-                v-model="input.name"
+                v-model="name"
               />
             </div>
           </div>
@@ -33,9 +33,9 @@
                 class="form-control"
                 id="inputUser"
                 placeholder="請輸入身分證"
-                pattern="^[A-Z]\d{9}$"
+                pattern="^[A-Z][1,2]\d{8}$"
                 required
-                v-model="input.idNumber"
+                v-model="idNumber"
               />
             </div>
           </div>
@@ -53,8 +53,13 @@
                 placeholder="09xxxxxxxx"
                 pattern="^09\d{8}$"
                 required
-                v-model="input.phone"
+                v-model="phone"
               />
+                <!-- name="phone"
+                v-bind:class="{ 'is-invalid': phoneError }" -->
+              <!-- <div class="invalid-feedback">
+                {{ phoneErrMsg }}
+              </div> -->
             </div>
           </div>
 
@@ -68,7 +73,7 @@
                 placeholder="xxx@gmail.com"
                 pattern="^.*@gmail\.com$"
                 required
-                v-model="input.email"
+                v-model="email"
               />
             </div>
           </div>
@@ -83,8 +88,14 @@
                 placeholder="至少8-12位英數的密碼限制"
                 pattern="[a-zA-Z0-9]{8,12}"
                 required
-                v-model="input.password"
+                v-model="password"
               />
+                <!-- name="password"
+                v-bind:class="{ 'is-invalid': passwordError }" -->
+              <!-- <div class="invalid-feedback">
+                {{ passwordErrMsg }}
+              </div> -->
+
             </div>
           </div>
 
@@ -101,37 +112,88 @@ import EventService from "@/service/EventService.js";
 export default {
   data() {
     return {
-      input: {
+      // input: {
         name: "",
+        // nameOk: "",
         phone: "",
+        // phoneError: false,
+        // phoneErrMsg: "",
         email: "",
         idNumber: "",
-        password: ""
-      }
+        password: "",
+        // passwordError: false,
+        // passwordErrMsg: "",
+      // }
     };
   },
+  // computed: {
+  //   nameOk() {
+  //     return this.name;
+  //   }
+  // },
+  // watch: {
+  //       password: function () {
+  //           var isText = /^[a-zA-Z0-9]+$/;
+  //           var inclde = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,15}$/;
+  //           // if (!isText.test(this.password)) {
+  //           //     this.passwordError = true;
+  //           //     this.passErrMsg = '請勿包含特殊字元';
+  //           // }
+  //           if (this.password.length < 8) {
+  //               this.passwordError = true;
+  //               // this.passErrMsg = '請勿少於6個字';
+  //           }
+  //           else if (this.password.length > 12) {
+  //               this.passwordError = true;
+  //               // this.passErrMsg = '請勿超過15個字';
+  //           }
+  //           else if (!isText.test(this.password)) {
+  //               this.passwordError = true;
+  //               // this.passErrMsg = '至少包括一個大小寫字母或數字';
+  //           }
+  //           else {
+  //               this.passwordError = false;
+  //           }
+  //       },
+  // },
   methods: {
     submitButton() {
-      console.log(this.input.name);
-      console.log(this.input.phone);
-      console.log(this.input.email);
-      console.log(this.input.idNumber);
-      console.log(this.input.password);
+
+      // var nameR = /required/;
+      var phoneR = /^09\d{8}$/;
+      var emailR = /^.*@gmail\.com$/;
+      var idNumberR = /^[A-Z][1,2]\d{8}$/;
+      // var passwordR = /[a-zA-Z0-9]{8,12}/
+      // var passwordR = /[a-zA-Z0-9]/;
+      var passwordR = /^[a-zA-Z0-9]{8,12}$/
+
+      // console.log(this.input.name);
+      // console.log(this.input.phone);
+      // console.log(this.input.email);
+      // console.log(this.input.idNumber);
+      // console.log(this.input.password);
       // let { name, phone, email, idNumber, password } = this.input;
       // category
-      this.axios
-        .post("http://127.0.0.1:8000/api/Admin/newDeveloper", {name:this.input.name, phone:this.input.phone, email:this.input.email, idNumber:this.input.idNumber, password:this.input.password})
-        .then(res => {
-          console.log(res.data);
-          this.input.name = "";
-          this.input.phone = "";
-          this.input.email = "";
-          this.input.idNumber = "";
-          this.input.password = "";
-        })
-        .catch(error => {
-          console.log(error);
-        });
+
+      // if(this.name != 0 && phoneR.test(this.phone) && emailR.test(this.email) && idNumberR.test(this.idNumber) && passwordR.test(this.password)) {
+      // if(this.name != 0 && phoneR.test(this.phone) && emailR.test(this.email) && idNumberR.test(this.idNumber) && passwordR.test(this.password) && 7 < this.password.length < 13) {
+      if(this.name != 0 && phoneR.test(this.phone) && emailR.test(this.email) && idNumberR.test(this.idNumber) && passwordR.test(this.password)) {
+        this.axios
+          .post("http://127.0.0.1:8000/api/Admin/newDeveloper", {name:this.name, phone:this.phone, email:this.email, idNumber:this.idNumber, password:this.password})
+          .then(res => {
+            console.log(res.data);
+            this.name = "";
+            this.phone = "";
+            this.email = "";
+            this.idNumber = "";
+            this.password = "";
+          })
+          .catch(error => {
+            console.log(error);
+          });
+        alert("新增開發者成功");
+      }
+
     }
   }
 };
